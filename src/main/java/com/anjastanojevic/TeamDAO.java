@@ -1,43 +1,7 @@
 package com.anjastanojevic;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class TeamDAO {
-
-    private List<Team> teamList = new ArrayList<>();
-
-    private static TeamDAO instance;
-
-    public static TeamDAO getInstance(){
-        if(instance == null){
-            instance = new TeamDAO();
-        }
-
-        return instance;
-    }
-
-    private TeamDAO(){
-        Employee employee1 = new Employee("John", "Doe","architect", "j_doe", "jdoe@gmail.com");
-        Employee employee2 = new Employee("Bob", "Williams","architect", "b_williams", "bwilliams@gmail.com");
-        Employee employee3 = new Employee("Jane", "Piters","architect", "j_piters", "jpiters@gmail.com");
-
-        List<Employee> employeeList = new ArrayList<>();
-        employeeList.add(employee1);
-        employeeList.add(employee2);
-        employeeList.add(employee3);
-
-        Team team1 = new Team("crveni", employeeList);
-        Team team2 = new Team("zeleni", employeeList);
-        Team team3 = new Team("ljubicasti", employeeList);
-
-        teamList.add(team1);
-        teamList.add(team2);
-        teamList.add(team3);
-    }
-
-
-    public List<Team> getAll() {
-        return new ArrayList<>(teamList);
-    }
+public interface TeamDAO {
+    List<Team> getAll();
 }

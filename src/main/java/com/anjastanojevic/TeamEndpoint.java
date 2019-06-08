@@ -3,20 +3,27 @@ package com.anjastanojevic;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
 
-@Path("/")
+@Path("/api/teams")
 public class TeamEndpoint {
 
+    private TeamDAO teamDAO;
+
+    @Inject
+    public TeamEndpoint(TeamDAO teamDAO){
+        this.teamDAO = teamDAO;
+    }
+
     @GET
-    @Path("api/teams")
     @Produces(MediaType.APPLICATION_JSON)
     public String teams() {
 
-        List<Team> teamList = TeamDAO.getInstance().getAll();
+        List<Team> teamList = teamDAO.getAll();
 
         //String json = new Gson().toJson(teamList);
         String json = new GsonBuilder().setPrettyPrinting().create().toJson(teamList);
@@ -25,7 +32,7 @@ public class TeamEndpoint {
     }
 
     @GET
-    @Path("api/teams/{team_name}")
+    @Path("/{team_name}")
     @Produces(MediaType.APPLICATION_JSON)
     public String teams(@PathParam("team_name") String team_name) {
         Employee employee1 = new Employee("John", "Doe","architect", "j_doe", "jdoe@gmail.com");
@@ -55,7 +62,6 @@ public class TeamEndpoint {
     }
 
     @POST
-    @Path("api/teams")
     @Produces(MediaType.APPLICATION_JSON)
     public String addTeam() {
         //TODO add support for adding teams

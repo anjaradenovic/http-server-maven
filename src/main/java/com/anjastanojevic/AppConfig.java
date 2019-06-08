@@ -15,6 +15,7 @@ public class AppConfig extends ResourceConfig {
             @Override
             protected void configure() {
                 bind(EmployeeDAOMySQL.class).to(EmployeeDAO.class).in(Singleton.class);
+                bind(TeamDAOMySQL.class).to(TeamDAO.class).in(Singleton.class);
             }
         });
     }
