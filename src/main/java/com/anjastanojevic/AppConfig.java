@@ -10,7 +10,7 @@ import javax.ws.rs.ApplicationPath;
 public class AppConfig extends ResourceConfig {
 
     public AppConfig() {
-        register(EmployeesEndpoint.class);
+        register(EmployeeEndpoint.class);
         register(new AbstractBinder() {
             @Override
             protected void configure() {

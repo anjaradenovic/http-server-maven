@@ -9,14 +9,14 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("/api/employees")
-public class EmployeesEndpoint {
+public class EmployeeEndpoint {
 
     private EmployeeDAO employeeDAO;
 
     @Inject
-    public EmployeesEndpoint(EmployeeDAO employeeDAO){
+    public EmployeeEndpoint(EmployeeDAO employeeDAO){
         this.employeeDAO = employeeDAO;
-        System.out.println("EmployeesEndpoint sa hashcodom " + this.hashCode() + " koristi EmployeeDAO sa haschodom " + employeeDAO.hashCode());
+        System.out.println("EmployeeEndpoint sa hashcodom " + this.hashCode() + " koristi EmployeeDAO sa haschodom " + employeeDAO.hashCode());
     }
 
     @GET

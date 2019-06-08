@@ -21,7 +21,7 @@ public class App
         // Tells the Jersey Servlet which REST service/class to load.
         jerseyServlet.setInitParameter(
                 "jersey.config.server.provider.classnames",
-                EmployeesEndpoint.class.getCanonicalName() + "," + TeamEndpoint.class.getCanonicalName());
+                EmployeeEndpoint.class.getCanonicalName() + "," + TeamEndpoint.class.getCanonicalName());
 
         jerseyServlet.setInitParameter(
                 ServletProperties.JAXRS_APPLICATION_CLASS,
