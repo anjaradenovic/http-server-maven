@@ -3,20 +3,28 @@ package com.anjastanojevic;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
 import java.util.List;
 
-@Path("/")
+@Path("/api/employees")
 public class EmployeesEndpoint {
 
+    private EmployeeDAO employeeDAO;
+
+    @Inject
+    public EmployeesEndpoint(EmployeeDAO employeeDAO){
+        this.employeeDAO = employeeDAO;
+        System.out.println("EmployeesEndpoint sa hashcodom " + this.hashCode() + " koristi EmployeeDAO sa haschodom " + employeeDAO.hashCode());
+    }
+
     @GET
-    @Path("api/employees")
+    @Path("")
     @Produces(MediaType.APPLICATION_JSON)
     public String employees() {
 
-        List<Employee> employeesList = EmployeeDAO.getInstance().getAll();
+        List<Employee> employeesList = employeeDAO.getAll();
 
 //        String json = new Gson().toJson(employeeList);
         String json = new GsonBuilder().setPrettyPrinting().create().toJson(employeesList);
@@ -24,24 +32,23 @@ public class EmployeesEndpoint {
     }
 
     @GET
-    @Path("api/employees/{user_name}")
+    @Path("/{user_name}")
     @Produces(MediaType.APPLICATION_JSON)
     public String employees(@PathParam("user_name") String employee_user_name) {
 
-        Employee employee = EmployeeDAO.getInstance().findbyUsername(employee_user_name);
+        Employee employee = employeeDAO.findbyUsername(employee_user_name);
         String json = new GsonBuilder().setPrettyPrinting().create().toJson(employee);
         return json;
     }
 
     @POST
-    @Path("api/employees")
+    @Path("")
     @Produces(MediaType.TEXT_PLAIN)
     public String addEmployee(String employeeAsJson) {
 
         Employee employee = new Gson().fromJson(employeeAsJson, Employee.class);
 
         try {
-            EmployeeDAO employeeDAO = EmployeeDAO.getInstance();
             employeeDAO.add(employee);
 
             return "Added";

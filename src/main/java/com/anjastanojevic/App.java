@@ -3,6 +3,7 @@ package com.anjastanojevic;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.glassfish.jersey.servlet.ServletProperties;
 
 public class App 
 {
@@ -21,6 +22,10 @@ public class App
         jerseyServlet.setInitParameter(
                 "jersey.config.server.provider.classnames",
                 EmployeesEndpoint.class.getCanonicalName() + "," + TeamEndpoint.class.getCanonicalName());
+
+        jerseyServlet.setInitParameter(
+                ServletProperties.JAXRS_APPLICATION_CLASS,
+                AppConfig.class.getName());
 
         try {
             jettyServer.start();
