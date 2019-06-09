@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
 
-@Path("/api/teams")
+@Path("/api/team")
 public class TeamEndpoint {
 
     private TeamDAO teamDAO;
@@ -55,7 +55,7 @@ public class TeamEndpoint {
 
         for (Team team : teamList) {
             if(team.getTeam_name().equals(team_name)){
-                return new Gson().toJson(team);
+                return new GsonBuilder().setPrettyPrinting().create().toJson(team);
             }
         }
         return "team doesn't exist";
